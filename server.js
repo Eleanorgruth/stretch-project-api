@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const knex = require('./knex')
+const { DatabaseError } = require('pg')
 
 app.set('port', 8080)
 
@@ -22,7 +23,6 @@ app.get('/api/v1/comicData/:id', async (request, response) => {
   
     if (comic.length) {
       response.status(200).json(comic)
-      
     } else {
       response.status(404).send(`Comic not found matching the id ${id}`)
     }
@@ -32,6 +32,19 @@ app.get('/api/v1/comicData/:id', async (request, response) => {
 })
 
 //Add new comic to collection
+app.post('/api/v1/comicData', async (request, response) => {
+  console.log(request.body)
+  // const id = await database("comicData").insert(newComic, 'id')
+  // const comic = await knex.where('id', id).select().from('comicData')
+  // response.status(201).send(comic)
+
+  try {
+    const id = await knex.insert(request.body).into('comicData');
+    response.status(201).json({ id })
+  } catch (error) {
+    response.status(500).json({ error });
+  }
+})
 
 //Update single comic in collection
 
