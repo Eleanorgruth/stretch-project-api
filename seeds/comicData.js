@@ -7,7 +7,7 @@ exports.seed = async function(knex) {
   await knex('comicData').del()
   await knex('comicData').insert([
     {
-      id: 1,
+      id: '1',
       title: 'Amazing Fantasy',
       year:'1962',
       issue: '15',
@@ -17,7 +17,7 @@ exports.seed = async function(knex) {
       note: "Marvel's Amazing Fantasy #15, the issue that first introduced the world to Peter Parker's Spider-Man, sold at auction for a record-breaking $3.6 million."
     },
     {
-      id: 2,
+      id: '2',
       title: 'Captain America',
       year: '1941',
       issue: '1',
@@ -27,7 +27,7 @@ exports.seed = async function(knex) {
       note: "Published in 1941, marks the first time comic legend Stan Lee worked with Marvel. #3 has a bit of a lower value, with $80,000 being its highest sale price thus far."
     },
     {
-      id: 3,
+      id: '3',
       title: 'X-Men ',
       year:'1963',
       issue: '1',
@@ -37,7 +37,7 @@ exports.seed = async function(knex) {
       note: "If there's any Silver Age comic that will rival Amazing Fantasy #15, it's X-Men #1. The 1963 book marks the first appearance of the X-Men, who have gone on to be among Marvel's most popular all time characters. A 9.6 of the book has sold for over $800,000, but even low grades still bring in $20,000 and above."
     },
     {
-      id: 4,
+      id: '4',
       title: 'Tales of Suspense',
       year:'1963',
       issue: '39',
@@ -47,7 +47,7 @@ exports.seed = async function(knex) {
       note: "Iron Man first made his Marvel debut in Tales of Suspense #39 from the iconic duo of Stan Lee and Jack Kirby. It's a key issue from this period in Marvel Comics, and only increased in value as Iron Man became the central figure in the Marvel Cinematic Universe."
     },
     {
-      id: 5,
+      id: '5',
       title: 'Giant Size X-Men',
       year: '1975',
       issue: '1',
