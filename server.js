@@ -8,6 +8,13 @@ app.set('port', PORT)
 
 app.use(cors())
 
+//TEST
+app.get('/', (request, response) => {
+  response.status(200).json({
+    smoke: "test"
+  })
+ })
+ 
 //Get all comics in collection
 app.get('/api/v1/comicData', async(request, response) => {
   const comicData= await knex.select().from('comicData')
@@ -31,20 +38,20 @@ app.get('/api/v1/comicData/:id', async (request, response) => {
   }
 })
 
-//Add new comic to collection
-app.post('/api/v1/comicData', async (request, response) => {
-  console.log(request.body)
-  // const id = await database("comicData").insert(newComic, 'id')
-  // const comic = await knex.where('id', id).select().from('comicData')
-  // response.status(201).send(comic)
+// //Add new comic to collection
+// app.post('/api/v1/comicData', async (request, response) => {
+//   console.log(request.body)
+//   // const id = await database("comicData").insert(newComic, 'id')
+//   // const comic = await knex.where('id', id).select().from('comicData')
+//   // response.status(201).send(comic)
 
-  try {
-    const id = await knex.insert(request.body).into('comicData');
-    response.status(201).json({ id })
-  } catch (error) {
-    response.status(500).json({ error });
-  }
-})
+//   try {
+//     const id = await knex.insert(request.body).into('comicData');
+//     response.status(201).json({ id })
+//   } catch (error) {
+//     response.status(500).json({ error });
+//   }
+// })
 
 //Update single comic in collection
 
