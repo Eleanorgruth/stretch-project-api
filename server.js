@@ -17,8 +17,8 @@ app.get('/', (request, response) => {
  
 //Get all comics in collection
 app.get('/api/v1/comicData', async(request, response) => {
-  const comicData= await knex.select().from('comicData')
-  response.status(200).json(comicData)
+  //const comicData= await knex.select().from('comicData')
+  response.status(200).json({RESPONSE: "COMIC DATA"})
 })
 
 //Get single comic in collection
