@@ -13,21 +13,21 @@ app.get('/', (request, response) => {
   response.status(200).json({
     smoke: "test"
   })
- })
- 
+})
+
 //Get all comics in collection
-app.get('/api/v1/comicData', async(request, response) => {
-  //const comicData= await knex.select().from('comicData')
-  response.status(200).json({RESPONSE: "COMIC DATA"})
+app.get('/api/v1/comicData', async (request, response) => {
+  const comicData = await knex.select().from('comicData')
+  response.status(200).json({ comicData })
 })
 
 //Get single comic in collection
 app.get('/api/v1/comicData/:id', async (request, response) => {
 
-  try{
+  try {
     const { id } = request.params
     const comic = await knex.where('id', id).select().from('comicData')
-  
+
     if (comic.length) {
       response.status(200).json(comic)
     } else {
