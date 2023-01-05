@@ -3,8 +3,8 @@ const app = express()
 const cors = require('cors')
 const knex = require('./knex')
 const { DatabaseError } = require('pg')
-
-app.set('port', 8080)
+const PORT = process.env.PORT || 8080
+app.set('port', PORT)
 
 app.use(cors())
 
@@ -50,6 +50,6 @@ app.post('/api/v1/comicData', async (request, response) => {
 
 //Delete single comic from collection
 
-app.listen(8080, () => {
-  console.log("Server has started on port 8080")
+app.listen(PORT, () => {
+  console.log(`Server has started on port ${PORT}`)
 })
