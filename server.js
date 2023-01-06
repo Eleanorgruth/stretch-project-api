@@ -3,11 +3,21 @@ const app = express()
 const cors = require('cors')
 const knex = require('./knex')
 const bodyParser = require('body-parser');
+const { DatabaseError } = require('pg')
+const PORT = process.env.PORT || 8080
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
-app.set('port', 8080)
+
+app.set('port', PORT)
+
+//TEST
+app.get('/', (request, response) => {
+  response.status(200).json({
+    smoke: "test"
+  })
+})
 
 //Get all comics in collection
 app.get('/api/v1/comicData', async (request, response) => {
@@ -20,10 +30,8 @@ app.get('/api/v1/comicData/:id', async (request, response) => {
   try {
     const { id } = request.params
     const comic = await knex.where('id', id).select().from('comicData')
-
     if (comic.length) {
       response.status(200).json(comic)
-
     } else {
       response.status(404).send(`Comic not found matching the id ${id}`)
     }
@@ -69,6 +77,6 @@ app.delete('/api/v1/comicData/:id', async (request, response) => {
   }
 })
 
-app.listen(8080, () => {
-  console.log("Server has started on port 8080")
+app.listen(PORT, () => {
+  console.log(`Server has started on port ${PORT}`)
 })
