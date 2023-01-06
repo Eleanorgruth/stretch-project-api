@@ -13,7 +13,7 @@ app.use(cors())
 
 //Get all comics in collection
 app.get('/api/v1/comicData', async(request, response) => {
-  const comicData= await knex.select().from('comicData')
+  const comicData = await knex.select().from('comicData')
   response.status(200).json(comicData)
 })
 
@@ -48,13 +48,30 @@ app.post('/api/v1/comicData', async(request, response) => {
     const comic = await knex('comicData').insert(request.body, ['id', 'title', 'year', 'issue', 'grade', 'image_path', 'verified', 'note'])
     response.status(201).json(comic[0])
   } catch (error) {
-    response.status(500).json(error.message)
+    response.status(500).json(error)
   }
 })
 
 //Update single comic in collection
 
+app.put('/api/v1/comicData/:id', async (request, response) => {
+  try {
+   const comic = await knex('comicData').where('id', Number(request.params.id)).update(request.body, ['id', 'title', 'year', 'issue', 'grade', 'image_path', 'verified', 'note'])
+    response.status(200).json(comic[0])
+  } catch (error) {
+    response.status(500).json(error)
+  }
+})
+
 //Delete single comic from collection
+app.delete('/api/v1/comicData/:id', async (request, response) => {
+  try {
+    await knex('comicData').where('id', Number(request.params.id)).del()
+    response.status(200).json({response: `Comic with id:${request.params.id} was deleted`})
+  } catch (error) {
+    response.status(500).json(error)
+  }
+})
 
 app.listen(8080, () => {
   console.log("Server has started on port 8080")
