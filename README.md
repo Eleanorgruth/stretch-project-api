@@ -20,5 +20,3 @@ This app is the back-end server for the Comic-Can Stretch project
 | `http://localhost:8080/api/v1/comicData:id` | DELETE | not needed |  `Comic with id:<Number> was deleted` |
 | `http://localhost:8080/api/v1/comicData:id` | PUT | `{id: <Number> , title: <String>, year: <String>, issue: <String>, grade: <String>, image_path: <String>, verified: <String>, note: <String>}.`| The updated object: `{id: <Number> , title: <String>, year: <String>, issue: <String>, grade: <String>, image_path: <String>, verified: <String>, note: <String>}.`
 
-
-Note: All of these endpoints will return semantic errors if something is wrong with the request.
