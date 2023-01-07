@@ -10,7 +10,7 @@ module.exports = {
       port: 5432,
       database: 'stretch_project',
       user: 'postgres',
-      password: 'erdwa20'
+      password: 'postgres'
     }
   },
   production: {

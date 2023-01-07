@@ -42,17 +42,18 @@ app.get('/api/v1/comicData/:id', async (request, response) => {
 
 //Add new comic to collection
 app.post('/api/v1/comicData', async (request, response) => {
-  for (let requiredParameter of ['id', 'title', 'year', 'issue', 'grade', 'image_path', 'verified', 'note']) {
+  for (let requiredParameter of ['title', 'year', 'issue', 'grade', 'image_path', 'verified', 'note']) {
     if (!request.body[requiredParameter]) {
       return response
         .status(422)
-        .send({ error: `Expected format: {id: <Number> , title: <String>, year: <String>, issue: <String>, grade: <String>, image_path: <String>, verified: <String>, note: <String>}. You're missing a "${requiredParameter}" property.` });
+        .send({ error: `Expected format: {title: <String>, year: <String>, issue: <String>, grade: <String>, image_path: <String>, verified: <String>, note: <String>}. You're missing a "${requiredParameter}" property.` });
     }
   }
   try {
     const comic = await knex('comicData').insert(request.body, ['id', 'title', 'year', 'issue', 'grade', 'image_path', 'verified', 'note'])
     response.status(201).json(comic[0])
   } catch (error) {
+    console.error(error)
     response.status(500).json(error)
   }
 })
